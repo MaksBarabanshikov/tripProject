@@ -1,19 +1,25 @@
-import {MyInput} from "@/shared/MyInput";
-import {date, object, string} from "yup";
+import {MyInput} from "../../../../shared/ui/MyInput";
+import {object, string} from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
-import {Button, FormErrorMessage} from "@chakra-ui/react";
-import {useLogin} from "@/api/queries/auth/useLogin";
-import {useEffect} from "react";
+import {Button, FormErrorMessage, ScaleFade} from "@chakra-ui/react";
+import {useLogin} from "@/app/api/queries/auth/useLogin";
+import {handlingErrorMessage} from "@/app/helpers";
+import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";
 
 const schema = object({
-    email: string().email("Введите корректный email").required("Поле обязательно к заполнению"),
+    username: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
     password: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
 }).required();
 
 export const Login = () => {
 
-    const { login, isLoading, error, data } = useLogin();
+    const {
+        login,
+        isLoading,
+        error,
+        isError
+    } = useLogin();
 
     const {
         register,
@@ -24,9 +30,6 @@ export const Login = () => {
         resolver: yupResolver(schema)
     });
 
-    useEffect(() => console.log(error, data), [error, data] )
-
-
     const onSubmit = (data: any) => {
         login(data)
     }
@@ -35,10 +38,9 @@ export const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <MyInput
                 isError={!!errors.email}
-                validate={register("email")}
+                validate={register("username")}
                 isRequired
-                type="email"
-                label={'Почта'}
+                label={'Имя пользователя'}
                 error={errors?.email?.message}
             />
             <MyInput
@@ -49,6 +51,12 @@ export const Login = () => {
                 label={'Пароль'}
                 error={errors?.password?.message}
             />
+            {
+                isError &&
+                <ScaleFade initialScale={0.8} in={isError}>
+                    <MyErrorMessage title={handlingErrorMessage(error)}></MyErrorMessage>
+                </ScaleFade>
+            }
             <Button type={"submit"} colorScheme='facebook' isLoading={isLoading} disabled={isLoading}>Войти</Button>
         </form>
     )
