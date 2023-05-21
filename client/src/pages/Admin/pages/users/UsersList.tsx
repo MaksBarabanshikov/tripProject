@@ -18,8 +18,8 @@ export const UsersList = () => {
     return (
         <Stack spacing={10} direction={'row'} flexWrap='wrap'>
             { users &&
-                users.data.map((user: IUser) => <Card>
-                    { user.details.username }
+                users.data.map((user: any) => <Card>
+                    { user.username }
                 </Card>)
             }
         </Stack>

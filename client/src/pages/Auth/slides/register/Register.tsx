@@ -6,6 +6,7 @@ import { object, string, ref } from "yup";
 import {useRegister} from "@/app/api/queries/auth/useRegister";
 import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";
 import {handlingErrorMessage} from "@/app/helpers";
+import {useLogin} from "@/app/api/queries/auth/useLogin";
 
 const schema = object({
     username: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
@@ -29,6 +30,14 @@ export const Register = () => {
         error
     } = useRegister()
 
+
+    const {
+        isLoading: isLoadingLogin,
+        login,
+        isError: isErrorLogin,
+        error: errorLogin
+    } = useLogin()
+
     const {
         register,
         handleSubmit,
@@ -38,8 +47,9 @@ export const Register = () => {
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = (data: any) => {
-        registration(data)
+    const onSubmit = async (data: any) => {
+        await registration(data)
+        await login({username: data.username, password: data.password} as any)
     }
 
     return(
@@ -96,16 +106,16 @@ export const Register = () => {
                 error={errors?.confirmPassword?.message}
             />
             {
-                isError &&
+                (isError || isErrorLogin) &&
                 <ScaleFade initialScale={0.8} in={isError}>
-                    <MyErrorMessage title={handlingErrorMessage(error)}></MyErrorMessage>
+                    <MyErrorMessage title={handlingErrorMessage(isError ? error : isErrorLogin ? errorLogin : null)}></MyErrorMessage>
                 </ScaleFade>
             }
             <Button
                 type={"submit"}
                 colorScheme='facebook'
-                isLoading={isLoading}
-                disabled={isLoading}
+                isLoading={isLoading || isLoadingLogin}
+                disabled={isLoading || isLoadingLogin}
             >
                 Войти
             </Button>
