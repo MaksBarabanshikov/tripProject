@@ -1,0 +1,19 @@
+.listItem {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+    padding: 0 20px;
+    border-radius: 10px;
+}
+
+.listItem:hover {
+    background-color: #ccc;
+    opacity: 1;
+}
+
+.listItem.active {
+    background-color: #ccc;
+}

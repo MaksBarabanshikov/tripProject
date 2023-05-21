@@ -1,9 +1,12 @@
 import React from 'react';
 import {MyInput} from "@/shared/ui/MyInput";
+import {SideBar} from "@/widgets/SideBar/SideBar";
+import {Stack} from "@chakra-ui/react";
 
 const Admin = () => {
     return (
-        <div>
+        <Stack direction="row">
+            <SideBar />
             <form>
                 <MyInput
                     isRequired
@@ -21,7 +24,7 @@ const Admin = () => {
                     isError={false}
                 />
             </form>
-        </div>
+        </Stack>
     );
 };
 
