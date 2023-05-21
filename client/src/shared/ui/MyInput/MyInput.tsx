@@ -1,4 +1,5 @@
-import {FormControl, FormErrorMessage, FormHelperText, FormLabel, Input} from "@chakra-ui/react";
+import React from "react";
+import {FormControl, FormErrorMessage, FormLabel, Input} from "@chakra-ui/react";
 import {FC} from "react";
 import styles from "./input.module.css";
 
@@ -30,7 +31,7 @@ export const MyInput: FC<Props> = (
             <Input
                 {...validate}
                 type={type}
-                value={value}
+                defaultValue={value}
                 onChange={(e) => onChange ? onChange(e.target.value) : null}
             />
             {isError && <FormErrorMessage>{error}</FormErrorMessage>}

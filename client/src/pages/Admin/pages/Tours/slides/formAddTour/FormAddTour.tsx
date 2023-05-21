@@ -8,12 +8,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useCreateTour} from "@/app/api/queries/admin/useCreateTour";
 import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";
 import {handlingErrorMessage} from "@/app/helpers";
-
-const data = [
-    {value: 1, text: 'Тип 1'},
-    {value: 2, text: 'Тип 2'},
-    {value: 3, text: 'Тип 3'}
-]
+import {typesTours} from "@/app/constants";
 
 const schema = object({
     name: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
@@ -53,7 +48,7 @@ const FormAddTour = () => {
                 validate={register("name")}
                 error={errors?.name?.message}
             />
-            <MySelect label={'Тип тура'} options={data} validate={register("type")}/>
+            <MySelect label={'Тип тура'} options={typesTours} validate={register("type")}/>
             <MyInput
                 isRequired
                 label={'Город'}

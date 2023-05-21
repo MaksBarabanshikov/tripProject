@@ -1,14 +1,5 @@
-export const TourTypes = [
-    {
-        id: 1,
-        name: 'Скандинавский тур'
-    },
-    {
-        id: 2,
-        name: 'Шоппинг тур'
-    },
-    {
-        id: 3,
-        name: 'тест'
-    }
+export const typesTours= [
+    {value: 1, text: 'Скандинавский тур'},
+    {value: 2, text: 'Шоппинг тур'},
+    {value: 3, text: 'тест'}
 ]
