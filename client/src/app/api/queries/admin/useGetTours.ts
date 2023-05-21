@@ -1,12 +1,12 @@
-import {useMutation} from "@tanstack/react-query";
+import {useQuery } from "@tanstack/react-query";
 import {AdminService} from "@/app/api/services/admin.service";
 
-export const useCreateTour = () => {
+export const useGetTours = () => {
     // const navigate = useNavigate();
 
-    const { isLoading, error, mutate: create, isError } = useMutation<any, any>({
-        mutationKey: ['createTour'],
-        mutationFn: (tour: any) => AdminService.createTour(tour),
+    const { isLoading, error, data: tours, isError } = useQuery<any, any>({
+        queryKey: ["getTours"],
+        queryFn: () => AdminService.getTours()
         // onSuccess: (res: any) => {
         //     setUser(res.data)
         //     if (res.data.isAdmin) {
@@ -16,5 +16,5 @@ export const useCreateTour = () => {
         // },
     });
 
-    return { isLoading, create, error, isError };
+    return { isLoading, tours, error, isError };
 };

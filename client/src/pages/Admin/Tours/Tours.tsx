@@ -1,6 +1,7 @@
 import React from 'react';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from "@chakra-ui/react";
 import FormAddTour from "@/pages/Admin/Tours/slides/formAddTour/FormAddTour";
+import ListTours from "@/pages/Admin/Tours/slides/listTours/ListTours";
 
 const Tours = () => {
     return (
@@ -14,7 +15,7 @@ const Tours = () => {
                     <FormAddTour/>
                 </TabPanel>
                 <TabPanel>
-                    список
+                    <ListTours/>
                 </TabPanel>
             </TabPanels>
         </Tabs>
