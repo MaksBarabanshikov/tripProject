@@ -25,9 +25,10 @@ export interface IAuthState {
 
 export const useAuthStore = create<IAuthState>()(
     devtools(
-        persist(
-            () => ({
+            (set) => ({
                 isAuth: !!getCookie('access_token'),
+                setIsAuth: () => set({
+                    isAuth: !!getCookie('access_token')
+                })
             }),
-            {name: 'AuthStore', version: 1}
-        )));
+        ));

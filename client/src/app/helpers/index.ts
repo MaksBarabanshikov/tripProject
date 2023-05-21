@@ -7,8 +7,14 @@ export function handlingErrorMessage(error: any) {
 }
 
 export function getCookie(name: string) {
-    let matches = document.cookie.match(new RegExp(
+    const matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));
     return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+export function deleteCookie(name: string) {
+    if( getCookie( name ) ) {
+        document.cookie = name + "= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    }
 }

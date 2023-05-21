@@ -20,7 +20,7 @@ export interface IUser {
 
 export interface IUserState {
     user: IUser | null;
-    setUser: (user: IUser) => void
+    setUser: (user: IUser | null) => void
 }
 
 export const useUserStore = create<IUserState>()(
@@ -28,7 +28,7 @@ export const useUserStore = create<IUserState>()(
         persist(
             (set) => ({
                 user: null,
-                setUser: (user: any) => set({
+                setUser: (user: IUser | null) => set({
                     user,
                 }),
             }),

@@ -1,7 +1,7 @@
-import {Card, Stack} from "@chakra-ui/react";
+import {Card, Heading, Stack} from "@chakra-ui/react";
 import {useGetUsers} from "@/app/api/queries/admin/useGetUsers";
 import {MyLoader} from "@/shared/ui/MyLoader/MyLoader";
-import {IUser} from "@/store/user";
+import {MyCard} from "@/shared/ui/MyCard";
 
 export const UsersList = () => {
     const {
@@ -16,12 +16,13 @@ export const UsersList = () => {
     }
 
     return (
-        <Stack spacing={10} direction={'row'} flexWrap='wrap'>
-            { users &&
-                users.data.map((user: any) => <Card>
-                    { user.username }
-                </Card>)
-            }
-        </Stack>
+        <>
+            <Heading marginBottom={20}>Список пользователей</Heading>
+            <Stack spacing={10} direction={'row'} alignContent={'center'} flexWrap='wrap' gap={10}>
+                { users &&
+                    users.data.map((user: any) => <MyCard title={user.username} description={user.email} />)
+                }
+            </Stack>
+        </>
     )
 }

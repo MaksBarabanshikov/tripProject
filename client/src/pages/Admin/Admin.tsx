@@ -8,7 +8,9 @@ const Admin = () => {
     return (
         <Stack direction="row">
             <SideBar />
-            <Outlet />
+            <div style={{ width: '100%' }}>
+                <Outlet />
+            </div>
         </Stack>
     );
 };
