@@ -1,8 +1,9 @@
-import {MyInput} from "../../../../shared/ui/MyInput";
+import React from "react";
+import {MyInput} from "@/shared/ui/MyInput";
 import {object, string} from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
-import {Button, FormErrorMessage, ScaleFade} from "@chakra-ui/react";
+import {Button, ScaleFade} from "@chakra-ui/react";
 import {useLogin} from "@/app/api/queries/auth/useLogin";
 import {handlingErrorMessage} from "@/app/helpers";
 import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";

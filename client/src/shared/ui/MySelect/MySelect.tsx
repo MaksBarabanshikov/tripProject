@@ -10,13 +10,14 @@ interface IOption {
 interface Props {
     label?: string;
     options: IOption[];
+    validate: any;
 }
 
-export const MySelect: FC<Props> = ({label, options}) => {
+export const MySelect: FC<Props> = ({label, options, validate}) => {
     return (
         <FormControl className={styles.select}>
             { label && <FormLabel>{label}</FormLabel> }
-            <Select>
+            <Select {...validate}>
                 {options.map(option => <option key={useId()} value={option.value}>{option.text}</option>)}
             </Select>
         </FormControl>
