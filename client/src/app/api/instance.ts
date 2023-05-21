@@ -1,16 +1,12 @@
 import axios from 'axios';
 
-// const baseURL = 'http://lifehacker.localhost/api/vue/';
 const baseURL = import.meta.env.VITE_URL_API || 'http://localhost:8800/api/';
 const instance = axios.create({
     baseURL,
     headers: {
         'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE',
-        'Access-Control-Allow-Headers':
-            'Origin, X-Requested-With, Content-Type, Accept',
     },
+    withCredentials: true,
 });
 
 instance.interceptors.request.use(function (config) {
