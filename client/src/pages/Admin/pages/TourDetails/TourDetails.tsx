@@ -15,7 +15,6 @@ import {typesTours} from "@/app/constants";
 import {usePutTour} from "@/app/api/queries/admin/usePutTour";
 
 
-
 const schema = object({
     name: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
     type: string().required("Поле обязательно к заполнению"),
@@ -31,7 +30,7 @@ const TourDetails = () => {
     const {id} = useParams()
     const {tour, isLoading, isError, error} = useGetTourById(id ? id : '')
     const {remove, isLoading: loadingDelete} = useDeleteTour()
-    const {put, error: putError, isError: putIsError, isLoading: putIsLoading} = usePutTour()
+    const {put, error: putError, isError: putIsError, isLoading: putIsLoading} = usePutTour(id ? id : '')
     const navigate = useNavigate()
     const {
         register,
@@ -49,7 +48,7 @@ const TourDetails = () => {
     }
 
     function onSubmit(data: any) {
-        console.log(data)
+        put({id, tour: {...data}})
     }
 
     if (isError) {
@@ -71,7 +70,8 @@ const TourDetails = () => {
                     error={errors?.name?.message}
                     value={tour.data.name}
                 />
-                <MySelect label={'Тип тура'} options={typesTours} validate={register("type")} defaultValue={tour.data.type}/>
+                <MySelect label={'Тип тура'} options={typesTours} validate={register("type")}
+                          defaultValue={tour.data.type}/>
                 <MyInput
                     isRequired
                     label={'Город'}
@@ -121,13 +121,13 @@ const TourDetails = () => {
                     value={tour.data.cheapestPrice}
                 />
                 {
-                    isError &&
-                    <ScaleFade initialScale={0.8} in={isError}>
-                        <MyErrorMessage title={handlingErrorMessage(error)}></MyErrorMessage>
+                    putIsError &&
+                    <ScaleFade initialScale={0.8} in={putIsError}>
+                        <MyErrorMessage title={handlingErrorMessage(putError)}></MyErrorMessage>
                     </ScaleFade>
                 }
-                <Button type={"submit"} colorScheme='facebook' isLoading={isLoading}
-                        disabled={isLoading}>Изменить</Button>
+                <Button type={"submit"} colorScheme='facebook' isLoading={putIsLoading}
+                        disabled={putIsLoading}>Изменить</Button>
             </form>
             <Button colorScheme={"red"} onClick={deleteTour} isLoading={loadingDelete}
                     disabled={loadingDelete}>Удалить</Button>
