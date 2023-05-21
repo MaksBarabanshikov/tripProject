@@ -11,13 +11,14 @@ interface Props {
     label?: string;
     options: IOption[];
     validate: any;
+    defaultValue?: any;
 }
 
-export const MySelect: FC<Props> = ({label, options, validate}) => {
+export const MySelect: FC<Props> = ({label, options, validate, defaultValue}) => {
     return (
         <FormControl className={styles.select}>
             { label && <FormLabel>{label}</FormLabel> }
-            <Select {...validate}>
+            <Select {...validate} defaultValue={defaultValue}>
                 {options.map(option => <option key={useId()} value={option.value}>{option.text}</option>)}
             </Select>
         </FormControl>
