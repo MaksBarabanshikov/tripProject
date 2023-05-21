@@ -17,11 +17,13 @@ export const Pages = () => {
 
     return (
         <Routes>
-            <Route path={'/'} element={
-                <Suspense fallback={<MyLoader/>}>
-                    <Auth/>
-                </Suspense>
-            }/>
+            <Route path={'/'} element={<ProtectedRoute isAuth={!isAuth} redirectPath={'/catalog'} />}>
+                <Route index element={
+                    <Suspense fallback={<MyLoader/>}>
+                        <Auth/>
+                    </Suspense>
+                }/>
+            </Route>
             <Route element={<ProtectedRoute isAuth={isAuth} />}>
                 <Route path={'/admin'} element={
                     <Suspense fallback={<MyLoader/>}>

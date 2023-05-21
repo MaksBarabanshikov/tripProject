@@ -5,7 +5,7 @@ import {
     ModalCloseButton,
     ModalContent, ModalFooter,
     ModalHeader,
-    ModalOverlay, Text,
+    ModalOverlay, Stack, Text,
     useDisclosure
 } from "@chakra-ui/react";
 
@@ -28,7 +28,9 @@ export const ModalBooking:FC<Props> = ({ tour }) => {
     const { isOpen, onOpen, onClose }: any = useDisclosure()
   return(
       <>
-          <Button onClick={onOpen}>Забронировать</Button>
+          <Stack justifyContent={'center'} >
+              <Button onClick={onOpen} disabled={!!tour.places.length}>Забронировать</Button>
+          </Stack>
 
           <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />

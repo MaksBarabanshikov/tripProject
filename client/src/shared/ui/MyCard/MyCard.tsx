@@ -34,7 +34,9 @@ interface PropsTour extends Props {
     address: string,
     city: string,
     places: string[],
-    name: string
+    name: string,
+    description: string,
+    rate: number,
 }
 
 export const MyTourCard:FC<PropsTour>= (
@@ -62,6 +64,9 @@ export const MyTourCard:FC<PropsTour>= (
                 }
                 <Text>
                     кол-во мест: { places.length }
+                </Text>
+                <Text>
+                    осталось мест: { places.length - 1 }
                 </Text>
                 <Text>
                     адрес: { address }
