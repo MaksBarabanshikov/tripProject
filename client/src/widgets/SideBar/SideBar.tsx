@@ -11,15 +11,15 @@ interface Props {
 const items = [
     {
         title: 'Туры',
-        to: '/tours',
+        to: '/admin/tours',
     },
     {
         title: 'Пользователи',
-        to: '/users',
+        to: '/admin/users',
     },
     {
         title: 'Бронирования',
-        to: '/bookings'
+        to: '/admin/bookings'
     }
 ]
 
@@ -33,7 +33,7 @@ export const SideBar: FC<Props> = () => {
                 }
             </Stack>
             <Link to={'/catalog'}>
-                <Button>
+                <Button marginTop={10}>
                     Перейти в каталог
                 </Button>
             </Link>

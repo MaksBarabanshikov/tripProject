@@ -8,10 +8,17 @@ interface Props {
     title: string;
 }
 
-export const MyListItem:FC<Props> = ({ title, to, className = '' }) => {
-    return(
-        <NavLink className={`${className} ${styles.listItem}`} to={to} >
-            { title }
+export const MyListItem: FC<Props> = ({title, to, className = ''}) => {
+    return (
+        <NavLink className={
+            ({isActive}) =>
+                isActive
+                    ? `${className} ${styles.listItem} ${styles.active}`
+                    : `${className} ${styles.listItem} `
+        }
+                 to={to}
+        >
+            {title}
         </NavLink>
     )
 }
