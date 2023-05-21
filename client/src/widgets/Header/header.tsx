@@ -28,13 +28,21 @@ export const Header = () => {
     return(
         <header style={{ marginBottom: 20 }}>
             <Stack direction={'row'} justifyContent={'space-between'}>
-                <Heading>Trip</Heading>
+                <Heading>
+                    <Link to={'/'}>Trip</Link>
+                </Heading>
                 <div>
                     { user?.details?.username }
-                    { user?.isAdmin &&
+                    { user?.isAdmin ?
                         <Link to={'/admin'}>
                             <Button marginLeft={2}>
                                 Админ панель
+                            </Button>
+                        </Link>
+                        :
+                        <Link to={'/profile'}>
+                            <Button marginLeft={2}>
+                                Личный кабинет
                             </Button>
                         </Link>
                     }

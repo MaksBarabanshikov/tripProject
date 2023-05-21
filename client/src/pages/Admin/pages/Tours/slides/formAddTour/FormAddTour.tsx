@@ -13,12 +13,12 @@ import {typesTours} from "@/app/constants";
 const schema = object({
     name: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
     type: string().required("Поле обязательно к заполнению"),
-    city: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
+    city: string().required("Поле обязательно к заполнению"),
     address: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    title: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
     desc: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    rooms: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    cheapestPrice: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
+    places: string().required("Поле обязательно к заполнению"),
+    price: string().required("Поле обязательно к заполнению"),
+    time: string().required("Поле обязательно к заполнению"),
 }).required();
 
 const FormAddTour = () => {
@@ -33,11 +33,9 @@ const FormAddTour = () => {
         resolver: yupResolver(schema)
     });
 
-
     const onSubmit = (data: any) => {
         create(data)
     }
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,13 +63,6 @@ const FormAddTour = () => {
             />
             <MyInput
                 isRequired
-                label={'Название'}
-                isError={!!errors.title}
-                validate={register("title")}
-                error={errors?.title?.message}
-            />
-            <MyInput
-                isRequired
                 label={'Описание'}
                 isError={!!errors.desc}
                 validate={register("desc")}
@@ -80,16 +71,24 @@ const FormAddTour = () => {
             <MyInput
                 isRequired
                 label={'Количество мест'}
-                isError={!!errors.rooms}
-                validate={register("rooms")}
-                error={errors?.rooms?.message}
+                isError={!!errors.places}
+                validate={register("places")}
+                error={errors?.places?.message}
             />
             <MyInput
                 isRequired
                 label={'Цена'}
-                isError={!!errors.cheapestPrice}
-                validate={register("cheapestPrice")}
-                error={errors?.cheapestPrice?.message}
+                isError={!!errors.price}
+                validate={register("price")}
+                error={errors?.price?.message}
+            />
+            <MyInput
+                isRequired
+                label={'Время'}
+                type={'datetime-local'}
+                isError={!!errors.time}
+                validate={register("time")}
+                error={errors?.time?.message}
             />
             {
                 isError &&
@@ -97,7 +96,7 @@ const FormAddTour = () => {
                     <MyErrorMessage title={handlingErrorMessage(error)}></MyErrorMessage>
                 </ScaleFade>
             }
-            <Button type={"submit"} colorScheme='facebook' isLoading={isLoading} disabled={isLoading}>Добавить</Button>
+            <Button type={"submit"} colorScheme='facebook' isLoading={isLoading} disabled={isLoading} width={"full"}>Добавить</Button>
         </form>
     );
 };

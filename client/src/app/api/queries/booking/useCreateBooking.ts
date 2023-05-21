@@ -1,12 +1,11 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {AdminService} from "@/app/api/services/admin.service";
-
-export const useCreateTour = () => {
+import {BookingService} from "@/app/api/services/booking.service";
+export const useCreateBooking = () => {
     const queryClient = useQueryClient()
 
     const { isLoading, error, mutate: create, isError } = useMutation<any, any>({
-        mutationKey: ['createTour'],
-        mutationFn: (tour: any) => AdminService.createTour(tour),
+        mutationKey: ['createBooking'],
+        mutationFn: (booking: any) => BookingService.createBooking(booking),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ["getTours"]})
     });
 

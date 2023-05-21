@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useGetTourById} from "@/app/api/queries/admin/useGetTourById";
 import {MyLoader} from "@/shared/ui/MyLoader/MyLoader";
-import {Button, ScaleFade} from "@chakra-ui/react";
+import {Button, Heading, ScaleFade} from "@chakra-ui/react";
 import {useDeleteTour} from "@/app/api/queries/admin/useDeleteTour";
 import {MyInput} from "@/shared/ui/MyInput";
 import {MySelect} from "@/shared/ui/MySelect";
@@ -18,12 +18,12 @@ import {usePutTour} from "@/app/api/queries/admin/usePutTour";
 const schema = object({
     name: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
     type: string().required("Поле обязательно к заполнению"),
-    city: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
+    city: string().required("Поле обязательно к заполнению"),
     address: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    title: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
     desc: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    rooms: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    cheapestPrice: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
+    places: string().required("Поле обязательно к заполнению"),
+    price: string().required("Поле обязательно к заполнению"),
+    time: string().required("Поле обязательно к заполнению"),
 }).required();
 
 const TourDetails = () => {
@@ -61,6 +61,7 @@ const TourDetails = () => {
 
     return (
         <>
+            <Heading marginBottom={20}>Тур {tour.data.name}</Heading>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <MyInput
                     isRequired
@@ -90,14 +91,6 @@ const TourDetails = () => {
                 />
                 <MyInput
                     isRequired
-                    label={'Название'}
-                    isError={!!errors.title}
-                    validate={register("title")}
-                    error={errors?.title?.message}
-                    value={tour.data.title}
-                />
-                <MyInput
-                    isRequired
                     label={'Описание'}
                     isError={!!errors.desc}
                     validate={register("desc")}
@@ -107,18 +100,27 @@ const TourDetails = () => {
                 <MyInput
                     isRequired
                     label={'Количество мест'}
-                    isError={!!errors.rooms}
-                    validate={register("rooms")}
-                    error={errors?.rooms?.message}
-                    value={tour.data.rooms}
+                    isError={!!errors.places}
+                    validate={register("places")}
+                    error={errors?.places?.message}
+                    value={tour.data.places}
                 />
                 <MyInput
                     isRequired
                     label={'Цена'}
-                    isError={!!errors.cheapestPrice}
-                    validate={register("cheapestPrice")}
-                    error={errors?.cheapestPrice?.message}
-                    value={tour.data.cheapestPrice}
+                    isError={!!errors.price}
+                    validate={register("price")}
+                    error={errors?.price?.message}
+                    value={tour.data.price}
+                />
+                <MyInput
+                    isRequired
+                    label={'Время'}
+                    type={'datetime-local'}
+                    isError={!!errors.time}
+                    validate={register("time")}
+                    error={errors?.time?.message}
+                    value={tour.data.time}
                 />
                 {
                     putIsError &&
@@ -127,10 +129,10 @@ const TourDetails = () => {
                     </ScaleFade>
                 }
                 <Button type={"submit"} colorScheme='facebook' isLoading={putIsLoading}
-                        disabled={putIsLoading}>Изменить</Button>
+                        disabled={putIsLoading} width={"full"} mb={"3"}>Изменить</Button>
             </form>
             <Button colorScheme={"red"} onClick={deleteTour} isLoading={loadingDelete}
-                    disabled={loadingDelete}>Удалить</Button>
+                    disabled={loadingDelete} width={"full"}>Удалить</Button>
         </>
     );
 };

@@ -6,7 +6,7 @@ import styles from "./input.module.css";
 interface Props {
     isError: boolean;
     isRequired: boolean;
-    type?: "text" | "email" | "password";
+    type?: "text" | "email" | "password" | "datetime-local";
     label?: string;
     value?: string;
     onChange?: (e: any) => void;

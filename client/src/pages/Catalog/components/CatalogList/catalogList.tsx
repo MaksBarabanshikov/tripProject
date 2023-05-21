@@ -27,14 +27,16 @@ export const CatalogList = () => {
             { tours.data.map((tour: any) => {
                 return <MyTourCard
                     key={tour._id}
-                    title={tour.name}
+                    id={tour._id}
                     description={tour.desc}
                     rate={tour.rate}
                     name={tour.name}
-                    price={tour.cheapestPrice}
+                    price={tour.price}
                     address={tour.address}
                     city={tour.city}
-                    places={tour.rooms}
+                    places={tour.places}
+                    time={tour.time}
+                    remainingPlaces={tour.remainingPlaces}
                 />
             }) }
         </Stack>

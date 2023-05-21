@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect} from 'react'
+import React, {Suspense} from 'react'
 import {Route, Routes} from "react-router-dom";
 import {ProtectedRoute} from "@/shared/routes/ProtectedRoute";
 import {useAuthStore} from "@/store/auth";
@@ -7,10 +7,12 @@ import {UsersList} from "@/pages/Admin/pages/users/UsersList";
 import Tours from "@/pages/Admin/pages/Tours/Tours";
 import {MyLoader} from "@/shared/ui/MyLoader/MyLoader";
 import TourDetails from "@/pages/Admin/pages/TourDetails/TourDetails";
+import BookingsList from "@/pages/Admin/pages/Bookings/BookingsList";
 
 const Auth = React.lazy(() => import('./Auth/Auth'))
 const Admin = React.lazy(() => import('./Admin/Admin'))
 const Catalog = React.lazy(() => import('./Catalog/Catalog'))
+const Profile = React.lazy(() => import('./Profile/Profile'))
 
 export const Pages = () => {
     const isAuth = useAuthStore( state => state.isAuth );
@@ -34,11 +36,16 @@ export const Pages = () => {
                     <Route path={'tours'} element={<Tours />} />
                     <Route path={'tours/:id'} element={<TourDetails/>}/>
                     <Route path={'users'} element={ <UsersList /> }/>
-                    <Route path={'bookings'} element={<div>bookings</div>} />
+                    <Route path={'bookings'} element={<BookingsList/>} />
                 </Route>
                 <Route path={'/catalog'} element={
                     <Suspense fallback={<MyLoader/>}>
                         <Catalog/>
+                    </Suspense>
+                }/>
+                <Route path={'/profile'} element={
+                    <Suspense fallback={<MyLoader/>}>
+                        <Profile/>
                     </Suspense>
                 }/>
             </Route>

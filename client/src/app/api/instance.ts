@@ -1,4 +1,8 @@
 import axios from 'axios';
+import {deleteCookie} from "@/app/helpers";
+import {useUserStore} from "@/store/user";
+import {useAuthStore} from "@/store/auth";
+
 
 const baseURL = import.meta.env.VITE_URL_API || 'http://localhost:8800/api/';
 const instance = axios.create({
@@ -9,32 +13,14 @@ const instance = axios.create({
     withCredentials: true,
 });
 
-instance.interceptors.request.use(function (config) {
-    // const authStore = useAuthStore();
-
-    // const token = authStore.userToken.token;
-    const token = null;
-
-    if (token) {
-        config.headers!.Authorization = `Bearer ${token}`;
+instance.interceptors.response.use(undefined, (err) => {
+    if (err.response.status === 401 || err.response.status === 419) {
+        const setUser = useUserStore(store => store.setUser);
+        const setIsAuth = useAuthStore((state: any) => state.setIsAuth);
+        deleteCookie('access_token');
+        setIsAuth()
+        return setUser(null);
     }
-
-    return config;
 });
-
-// instance.interceptors.response.use(undefined, (err) => {
-//     const errorMessage = err.request.response;
-//
-//     if (err.response.status === 401 || err.response.status === 419) {
-//         const token = authStore.userToken;
-//
-//         if (token) {
-//             authStore.logout();
-//             return router.push({ name: 'home' });
-//         }
-//     }
-//
-//     return Promise.reject(JSON.parse(errorMessage));
-// });
 
 export default instance;

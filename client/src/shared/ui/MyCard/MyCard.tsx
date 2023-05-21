@@ -1,19 +1,36 @@
-import React, {FC, PropsWithChildren} from "react";
-import {Button, Card, CardBody, CardFooter, CardHeader, Heading, Stack, Text} from "@chakra-ui/react";
+import React, {FC} from "react";
+import {
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    Heading,
+    IconButton,
+    Menu,
+    MenuButton, MenuItem, MenuList,
+    Stack,
+    Text
+} from "@chakra-ui/react";
 import styles from "./MyCard.module.css";
 import {ModalBooking} from "@/shared/ui/ModalBooking/ModalBooking";
+import MyBadge from "@/shared/ui/MyBadge/MyBage";
+import {useLocation} from "react-router-dom";
+import {statusesBookings} from "@/app/constants";
+import {usePutBooking} from "@/app/api/queries/booking/usePutBooking";
 
 interface Props {
-    title: string;
+    name: string;
     description?: string;
     rate?: number;
+    mb?: string;
 }
 
-export const MyCard: FC<Props> = ({title, description, rate}) => {
+export const MyCard: FC<Props> = ({name, description, rate}) => {
     return (
         <Card marginLeft={0} className={styles.MyCard}>
             <CardHeader>
-                <Heading as='h4' size="md">{title}</Heading>
+                <Heading as='h4' size="md">{name}</Heading>
             </CardHeader>
             <CardBody>
                 {description &&
@@ -30,31 +47,38 @@ export const MyCard: FC<Props> = ({title, description, rate}) => {
 }
 
 interface PropsTour extends Props {
+    id?: string,
     price: number,
     address: string,
     city: string,
-    places: string[],
+    places: number,
     name: string,
     description: string,
     rate: number,
+    time: string,
+    remainingPlaces: number
 }
 
-export const MyTourCard:FC<PropsTour>= (
+export const MyTourCard: FC<PropsTour> = (
     {
-        title,
+        id,
         description,
         rate,
         places,
         address,
         city,
         name,
-        price
+        price,
+        time,
+        remainingPlaces,
+        mb
     }) => {
-    return(
-        <Card marginLeft={0} className={styles.MyCard}>
+    const {pathname} = useLocation()
+
+    return (
+        <Card marginLeft={0} className={styles.MyCard} mb={mb}>
             <CardHeader>
-                <Heading as='h4' size="md">{title}</Heading>
-                <Heading as='h6' size="sm">{name}</Heading>
+                <Heading as='h4' size="md">{name}</Heading>
             </CardHeader>
             <CardBody>
                 {description &&
@@ -63,36 +87,96 @@ export const MyTourCard:FC<PropsTour>= (
                     </Text>
                 }
                 <Text>
-                    кол-во мест: { places.length }
+                    кол-во мест: {places}
                 </Text>
                 <Text>
-                    осталось мест: { places.length - 1 }
+                    осталось мест: {remainingPlaces}
                 </Text>
                 <Text>
-                    адрес: { address }
+                    адрес: {address}
                 </Text>
                 <Text>
-                    город : { city }
+                    город : {city}
+                </Text>
+                <Text>
+                    Время : {time}
                 </Text>
             </CardBody>
             <CardFooter>
                 <Stack direction={'column'}>
                     {rate && <Heading as="h6" size="xs">Рейтинг: {rate}</Heading>}
                     <Text>
-                        цена: { price + 'Р' }
+                        цена: {price + 'Р'}
                     </Text>
-                    <ModalBooking tour={{
-                        title,
-                        description,
-                        rate,
-                        places,
-                        address,
-                        city,
-                        name,
-                        price
-                    }} />
+                    {!pathname.includes('admin') &&
+                        <ModalBooking tour={{
+                            id,
+                            description,
+                            rate,
+                            places,
+                            address,
+                            city,
+                            name,
+                            price,
+                            time
+                        }}
+                        />
+                    }
                 </Stack>
             </CardFooter>
+        </Card>
+    )
+}
+
+interface IBookingProps {
+    booking: any
+    mb?: string
+}
+
+export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
+    const {put} = usePutBooking()
+    const {pathname} = useLocation()
+
+    function onClick(data: any) {
+        put(data)
+    }
+
+    return (
+        <Card marginLeft={0} className={styles.MyCard} mb={mb}>
+            <Text>
+                Тур: {booking?.tour?.name}
+            </Text>
+            <Text>
+                Заказчик: {booking?.user?.username}
+            </Text>
+            <Text>
+                Количество людей: {booking.countPeople}
+            </Text>
+            <Text>
+                Цена: {booking.price} Р
+            </Text>
+            <MyBadge status={booking.status}/>
+            {pathname.includes('admin') &&
+                <Menu>
+                    <MenuButton
+                        as={Button}
+                    >
+                        Сменить статус
+                    </MenuButton>
+                    <MenuList>
+                        {statusesBookings.map(item => {
+                            if (item.value != booking.status) {
+                                return (
+                                    <MenuItem key={item.value}
+                                              onClick={() => onClick({...booking, status: item.value})}>
+                                        {item.text}
+                                    </MenuItem>
+                                )
+                            }
+                        })}
+                    </MenuList>
+                </Menu>
+            }
         </Card>
     )
 }
