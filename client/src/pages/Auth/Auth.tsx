@@ -1,3 +1,4 @@
+import React from "react";
 import {
     Tab,
     TabList,
@@ -9,7 +10,7 @@ import {Login} from "@/pages/Auth/slides/login/Login";
 import styles from './auth.module.css';
 import {Register} from "@/pages/Auth/slides/register/Register";
 
-export const Auth = () => {
+const Auth = () => {
     return(
         <section className={styles.authPage}>
             <Tabs>
@@ -29,3 +30,5 @@ export const Auth = () => {
         </section>
     )
 }
+
+export default Auth
