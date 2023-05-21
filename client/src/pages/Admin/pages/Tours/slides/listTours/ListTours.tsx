@@ -1,20 +1,29 @@
 import React from 'react';
 import {useGetTours} from "@/app/api/queries/admin/useGetTours";
 import {MyLoader} from "@/shared/ui/MyLoader/MyLoader";
-import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {MyTourCard} from "@/shared/ui/MyCard";
 
 const ListTours = () => {
     const {isError, tours, error, isLoading} = useGetTours()
-    const navigate = useNavigate()
 
     if (isLoading) {
-        return <MyLoader />
+        return <MyLoader/>
     }
 
     return (
-        <div>
-            {tours && tours.data.map((tour: any) => <div aria-hidden={"true"} onClick={() => navigate(`/admin/tours/${tour._id}`)} key={tour._id}>{tour.name}</div>)}
-        </div>
+        <>
+            {tours && tours.data.map((tour: any) =>
+                (<Link key={tour._id} to={`/admin/tours/${tour._id}`}>
+                    <MyTourCard key={tour._id}
+                                price={tour.cheapestPrice}
+                                address={tour.address}
+                                city={tour.city}
+                                places={tour.rooms}
+                                name={tour.name}
+                                title={tour.title}/>
+                </Link>))}
+        </>
     );
 };
 
