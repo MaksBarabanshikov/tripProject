@@ -6,5 +6,8 @@ export const AdminService = {
     },
     getTours: async function() {
         return await instance.get('tours/')
+    },
+    getUsers: async function() {
+        return await instance.get('users/')
     }
 }

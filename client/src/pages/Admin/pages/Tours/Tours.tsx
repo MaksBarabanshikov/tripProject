@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tab, TabList, TabPanel, TabPanels, Tabs} from "@chakra-ui/react";
-import FormAddTour from "@/pages/Admin/Tours/slides/formAddTour/FormAddTour";
-import ListTours from "@/pages/Admin/Tours/slides/listTours/ListTours";
+import ListTours from "@/pages/Admin/pages/Tours/slides/listTours/ListTours";
+import FormAddTour from "@/pages/Admin/pages/Tours/slides/formAddTour/FormAddTour";
 
 const Tours = () => {
     return (

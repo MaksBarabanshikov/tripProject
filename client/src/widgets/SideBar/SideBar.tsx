@@ -26,7 +26,9 @@ const items = [
 export const SideBar: FC<Props> = () => {
     return(
         <aside className={styles.sidebar}>
-            <Heading as='h4' size='lg'>Trip Admin</Heading>
+            <Link to={'/admin'}>
+                <Heading as='h4' size='lg'>Trip Admin</Heading>
+            </Link>
             <Stack direction="column">
                 {
                     items.map(item => <MyListItem key={item.title} to={item.to} title={item.title} />)
