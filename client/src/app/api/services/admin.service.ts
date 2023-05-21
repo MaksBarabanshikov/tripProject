@@ -4,4 +4,7 @@ export const AdminService = {
     createTour: async function(tour: any) {
         return await instance.post('tours/', tour);
     },
+    getUsers: async function() {
+        return await instance.get('users/')
+    }
 }

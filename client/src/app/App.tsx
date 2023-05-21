@@ -2,6 +2,7 @@ import React from "react";
 import './App.css'
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Pages} from "@/pages";
+import {AxiosResponse} from "axios";
 
 const queryClient = new QueryClient({
     defaultOptions: {
