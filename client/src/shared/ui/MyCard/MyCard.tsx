@@ -92,25 +92,25 @@ export const MyTourCard: FC<PropsTour> = (
                     </Text>
                 }
                 <Text>
-                    { t('numberOfSeats') + ':' + places }
+                    {t('numberOfSeats') + ':' + places}
                 </Text>
                 <Text>
-                    { t('placesLeft') + ':' + remainingPlaces }
+                    {t('placesLeft') + ':' + remainingPlaces}
                 </Text>
                 <Text>
-                    { t('address') + ':' + address }
+                    {t('address') + ':' + address}
                 </Text>
                 <Text>
-                    { t('city') + ':' + city }
+                    {t('city') + ':' + city}
                 </Text>
                 <Text>
-                    { t('time') + ':' + time }
+                    {t('time') + ':' + time}
                 </Text>
             </CardBody>
             <CardFooter>
                 <Stack style={{width: '100%'}} direction={'column'}>
                     {rate && <Heading as="h6" size="xs">
-                        { t('rate') + ':' + rate }
+                        {t('rate') + ':' + rate}
                     </Heading>}
                     <Text>
                         { t('price') + ':' + currentPrice(price, locale) }
@@ -154,26 +154,24 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
     return (
         <Card marginLeft={0} className={styles.MyCard} mb={mb}>
             <Text>
-                { t('tour') + ':' + booking?.tour?.name[locale]  }
+                {t('tour') + ':' + booking?.tour?.name[locale]}
             </Text>
             <Text>
-                { t('customer') + ':' + booking?.user?.username  }
+                {t('customer') + ':' + booking?.user?.username}
             </Text>
             <Text>
-                { t('numberOfPersons') + ':' + booking?.countPeople  }
+                {t('numberOfPersons') + ':' + booking?.countPeople}
             </Text>
-            <Tooltip label={t('priceFor1Person')} fontSize='md'>
-                <Text>
-                    { t('price') + ':' + currentPrice(booking.price, locale) }
-                </Text>
-            </Tooltip>
+            <Text>
+                { t('price') + ':' + currentPrice(booking.price, locale) }
+            </Text>
             <MyBadge status={booking.status}/>
             {pathname.includes('admin') &&
                 <Menu>
                     <MenuButton
                         as={Button}
                     >
-                        { t('changeStatus') }
+                        {t('changeStatus')}
                     </MenuButton>
                     <MenuList>
                         {statusesBookings.map(item => {
