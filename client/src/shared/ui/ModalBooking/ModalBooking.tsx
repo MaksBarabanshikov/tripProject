@@ -14,6 +14,8 @@ import {object, string} from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useTranslation} from "react-i18next";
+import {currentPrice} from "@/app/helpers";
+import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 
 export interface ITour {
     id?: string,
@@ -41,6 +43,7 @@ export const ModalBooking: FC<Props> = ({tour}) => {
     const {create} = useCreateBooking()
 
     const { t } = useTranslation()
+    const { locale } = useLocalization();
 
     const {
         register,
@@ -77,7 +80,7 @@ export const ModalBooking: FC<Props> = ({tour}) => {
                             { t('city') + ':' + tour.city }
                         </Text>
                         <Text>
-                            { t('price') + ':' + tour.price + 'Р'}
+                            { t('price') + ':' + currentPrice(tour.price, locale) }
                         </Text>
                         <Text>
                             { t('numberOfSeats') + ':' + tour.places }

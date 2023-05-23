@@ -19,6 +19,7 @@ import {statusesBookings} from "@/app/constants";
 import {usePutBooking} from "@/app/api/queries/booking/usePutBooking";
 import {useTranslation} from "react-i18next";
 import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
+import {currentPrice} from "@/app/helpers";
 
 interface Props {
     name: string;
@@ -28,6 +29,7 @@ interface Props {
 }
 
 export const MyCard: FC<Props> = ({name, description, rate}) => {
+    const {t} = useTranslation();
     return (
         <Card marginLeft={0} className={styles.MyCard}>
             <CardHeader>
@@ -41,7 +43,7 @@ export const MyCard: FC<Props> = ({name, description, rate}) => {
                 }
             </CardBody>
             <CardFooter>
-                {rate && <Heading as="h6" size="xs">Рейтинг: {rate}</Heading>}
+                {rate && <Heading as="h6" size="xs">{t('rate') + ':' + rate}</Heading>}
             </CardFooter>
         </Card>
     )
@@ -76,6 +78,7 @@ export const MyTourCard: FC<PropsTour> = (
     }) => {
     const {pathname} = useLocation()
     const { t } = useTranslation()
+    const {locale} = useLocalization()
 
     return (
         <Card marginLeft={0} className={styles.MyCard} mb={mb}>
@@ -110,7 +113,7 @@ export const MyTourCard: FC<PropsTour> = (
                         { t('rate') + ':' + rate }
                     </Heading>}
                     <Text>
-                        { t('price') + ':' + price + 'Р'}
+                        { t('price') + ':' + currentPrice(price, locale) }
                     </Text>
                     {!pathname.includes('admin') &&
                         <ModalBooking tour={{
@@ -140,7 +143,6 @@ interface IBookingProps {
 
 export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
     const {t} = useTranslation();
-    const { locale } = useLocalization()
     const {put} = usePutBooking()
     const {pathname} = useLocation()
     const {locale} = useLocalization()
@@ -162,7 +164,7 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
             </Text>
             <Tooltip label={t('priceFor1Person')} fontSize='md'>
                 <Text>
-                    { t('price') + ':' + booking?.price + 'P'  }
+                    { t('price') + ':' + currentPrice(booking.price, locale) }
                 </Text>
             </Tooltip>
             <MyBadge status={booking.status}/>

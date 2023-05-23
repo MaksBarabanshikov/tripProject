@@ -1,3 +1,5 @@
+import {ILang} from "@/store/lang";
+
 export function handlingErrorMessage(error: any) {
     if (error?.response?.data?.message) {
         console.log(error.response?.data?.message)
@@ -17,4 +19,11 @@ export function deleteCookie(name: string) {
     if( getCookie( name ) ) {
         document.cookie = name + "= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     }
+}
+
+export function currentPrice(price: number, locale: ILang): string {
+    if (locale === "ru") {
+        return price + '₽'
+    }
+    return Math.round(price / 80) + '$'
 }
