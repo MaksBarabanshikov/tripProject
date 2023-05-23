@@ -4,9 +4,11 @@ import {MyLoader} from "@/shared/ui/MyLoader/MyLoader";
 import {Link} from "react-router-dom";
 import {MyTourCard} from "@/shared/ui/MyCard";
 import MyBadge from "@/shared/ui/MyBadge/MyBage";
+import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 
 const ListTours = () => {
     const {isError, tours, error, isLoading} = useGetTours()
+    const {normalizeDate} = useLocalization()
 
     if (isLoading) {
         return <MyLoader/>
@@ -24,7 +26,7 @@ const ListTours = () => {
                         name={tour.name.en}
                         description={tour.desc.ru}
                         rate={tour.rate}
-                        time={tour.time}
+                        time={normalizeDate(tour.time)}
                         remainingPlaces={tour.remainingPlaces}
                         mb={"5"}
                     />

@@ -19,5 +19,9 @@ export const useLocalization = () => {
         return setLocale(locale === 'ru' ? 'en' : 'ru' )
     }
 
-    return { handleChangeLocale, locale }
+    function normalizeDate(date: string) {
+        return new Date(date).toLocaleString(locale)
+    }
+
+    return { handleChangeLocale, normalizeDate, locale }
 }

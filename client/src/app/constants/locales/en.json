@@ -1,3 +1,17 @@
 {
-  "welcome": "Welcome to our app!"
+  "welcome": "Добро пожаловать в наше приложение!",
+  "tours": "Tours",
+  "users": "Users",
+  "bookings": "Bookings",
+  "goToCatalog": "Go to catalogue",
+  "addTour": "Add a tour",
+  "listTour": "Tour list",
+  "nameTour": "Tour name",
+  "typeTour": "Tour type",
+  "city": "City",
+  "address": "Address",
+  "description": "Description",
+  "numberOfSeats": "Number of seats",
+  "price": "Price",
+  "time": "Time"
 }
