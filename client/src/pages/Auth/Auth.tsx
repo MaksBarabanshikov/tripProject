@@ -9,14 +9,16 @@ import {
 import {Login} from "@/pages/Auth/slides/login/Login";
 import styles from './auth.module.css';
 import {Register} from "@/pages/Auth/slides/register/Register";
+import {useTranslation} from "react-i18next";
 
 const Auth = () => {
+    const {t} = useTranslation();
     return(
         <section className={styles.authPage}>
             <Tabs>
                 <TabList>
-                    <Tab>Авторизация</Tab>
-                    <Tab>Регистрация</Tab>
+                    <Tab>{t('auth')}</Tab>
+                    <Tab>{t('register')}</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>

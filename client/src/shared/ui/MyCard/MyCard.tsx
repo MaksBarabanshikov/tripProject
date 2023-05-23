@@ -17,6 +17,7 @@ import MyBadge from "@/shared/ui/MyBadge/MyBage";
 import {useLocation} from "react-router-dom";
 import {statusesBookings} from "@/app/constants";
 import {usePutBooking} from "@/app/api/queries/booking/usePutBooking";
+import {useTranslation} from "react-i18next";
 
 interface Props {
     name: string;
@@ -73,6 +74,7 @@ export const MyTourCard: FC<PropsTour> = (
         mb
     }) => {
     const {pathname} = useLocation()
+    const { t } = useTranslation()
 
     return (
         <Card marginLeft={0} className={styles.MyCard} mb={mb}>
@@ -86,26 +88,28 @@ export const MyTourCard: FC<PropsTour> = (
                     </Text>
                 }
                 <Text>
-                    кол-во мест: {places}
+                    { t('numberOfSeats') + ':' + places }
                 </Text>
                 <Text>
-                    осталось мест: {remainingPlaces}
+                    { t('placesLeft') + ':' + remainingPlaces }
                 </Text>
                 <Text>
-                    адрес: {address}
+                    { t('address') + ':' + address }
                 </Text>
                 <Text>
-                    город : {city}
+                    { t('city') + ':' + city }
                 </Text>
                 <Text>
-                    Время : {time}
+                    { t('time') + ':' + time }
                 </Text>
             </CardBody>
             <CardFooter>
                 <Stack style={{width: '100%'}} direction={'column'}>
-                    {rate && <Heading as="h6" size="xs">Рейтинг: {rate}</Heading>}
+                    {rate && <Heading as="h6" size="xs">
+                        { t('rate') + ':' + rate }
+                    </Heading>}
                     <Text>
-                        цена: {price + 'Р'}
+                        { t('price') + ':' + price + 'Р'}
                     </Text>
                     {!pathname.includes('admin') &&
                         <ModalBooking tour={{
@@ -114,6 +118,7 @@ export const MyTourCard: FC<PropsTour> = (
                             rate,
                             places,
                             address,
+                            remainingPlaces,
                             city,
                             name,
                             price,

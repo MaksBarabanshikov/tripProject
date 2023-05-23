@@ -13,6 +13,7 @@ import {useCreateBooking} from "@/app/api/queries/booking/useCreateBooking";
 import {object, string} from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {useTranslation} from "react-i18next";
 
 export interface ITour {
     id?: string,
@@ -23,7 +24,8 @@ export interface ITour {
     city: string,
     name: string,
     price: number,
-    time: string
+    time: string,
+    remainingPlaces: number
 }
 
 interface Props {
@@ -37,6 +39,8 @@ const schema = object({
 export const ModalBooking: FC<Props> = ({tour}) => {
     const {isOpen, onOpen, onClose}: any = useDisclosure()
     const {create} = useCreateBooking()
+
+    const { t } = useTranslation()
 
     const {
         register,
@@ -54,38 +58,35 @@ export const ModalBooking: FC<Props> = ({tour}) => {
     return (
         <>
             <Stack style={{ width: '100%' }} justifyContent={'center'}>
-                <Button onClick={onOpen} width={"full"} disabled={!!tour.places}>Забронировать</Button>
+                <Button onClick={onOpen} width={"full"} disabled={!!tour.places}>{ t('toBook') }</Button>
             </Stack>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
                 <ModalContent>
-                    <ModalHeader>Забронировать {tour.name}</ModalHeader>
+                    <ModalHeader>{ t('toBook') + tour.name}</ModalHeader>
                     <ModalCloseButton/>
                     <ModalBody>
                         <Text>
                             {tour.description}
                         </Text>
                         <Text>
-                            адрес: {tour.address}
+                            { t('address') + ':' + tour.address }
                         </Text>
                         <Text>
-                            город: {tour.city}
+                            { t('city') + ':' + tour.city }
                         </Text>
                         <Text>
-
+                            { t('price') + ':' + tour.price + 'Р'}
                         </Text>
                         <Text>
-                            цена: {tour.price + ' Р'}
+                            { t('numberOfSeats') + ':' + tour.places }
                         </Text>
                         <Text>
-                            Всего мест: {tour.places}
+                            { t('placesLeft') + ':' + tour.remainingPlaces }
                         </Text>
                         <Text>
-                            Осталось мест: {tour.places - 1}
-                        </Text>
-                        <Text>
-                            Время : {tour.time}
+                            { t('time') + ':' + tour.time }
                         </Text>
                     </ModalBody>
 
@@ -96,7 +97,7 @@ export const ModalBooking: FC<Props> = ({tour}) => {
                                      isError={!!errors.countPeople}
                                      validate={register("countPeople")}
                                      error={errors?.countPeople?.message}/>
-                            <Button variant='solid' type={"submit"}>Забронировать</Button>
+                            <Button variant='solid' type={"submit"}>{ t('toBook') }</Button>
                         </form>
                     </ModalFooter>
                 </ModalContent>

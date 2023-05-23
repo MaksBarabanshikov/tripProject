@@ -8,7 +8,8 @@ import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 
 const ListTours = () => {
     const {isError, tours, error, isLoading} = useGetTours()
-    const { locale } = useLocalization();
+    const {normalizeDate, locale} = useLocalization()
+
     if (isLoading) {
         return <MyLoader/>
     }
@@ -25,7 +26,7 @@ const ListTours = () => {
                         name={tour.name[locale]}
                         description={tour.desc[locale]}
                         rate={tour.rate}
-                        time={tour.time}
+                        time={normalizeDate(tour.time)}
                         remainingPlaces={tour.remainingPlaces}
                         mb={"5"}
                     />
