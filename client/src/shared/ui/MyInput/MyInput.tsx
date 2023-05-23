@@ -6,12 +6,13 @@ import styles from "./input.module.css";
 interface Props {
     isError: boolean;
     isRequired: boolean;
-    type?: "text" | "email" | "password" | "datetime-local";
+    type?: "text" | "email" | "password" | "datetime-local" | "number";
     label?: string;
     value?: string;
     onChange?: (e: any) => void;
     error?: any;
     validate?: any;
+    max?: number;
 }
 
 export const MyInput: FC<Props> = (
@@ -23,7 +24,8 @@ export const MyInput: FC<Props> = (
         label,
         type = "text",
         validate,
-        isRequired
+        isRequired,
+        max
     }) => {
     return (
         <FormControl className={styles.input} isInvalid={isError} isRequired={isRequired}>
@@ -33,6 +35,7 @@ export const MyInput: FC<Props> = (
                 type={type}
                 defaultValue={value}
                 onChange={(e) => onChange ? onChange(e.target.value) : null}
+                max={max}
             />
             {isError && <FormErrorMessage>{error}</FormErrorMessage>}
         </FormControl>

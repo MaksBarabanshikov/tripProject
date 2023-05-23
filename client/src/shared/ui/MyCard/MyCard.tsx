@@ -143,6 +143,7 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
     const { locale } = useLocalization()
     const {put} = usePutBooking()
     const {pathname} = useLocation()
+    const {locale} = useLocalization()
 
     function onClick(data: any) {
         put(data)
@@ -178,7 +179,7 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
                                 return (
                                     <MenuItem key={item.value}
                                               onClick={() => onClick({...booking, status: item.value})}>
-                                        {item.text}
+                                        {item[locale].text}
                                     </MenuItem>
                                 )
                             }

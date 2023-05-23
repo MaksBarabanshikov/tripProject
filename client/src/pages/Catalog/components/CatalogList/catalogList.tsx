@@ -58,7 +58,7 @@ export const CatalogList = () => {
                     colorScheme={item.value === selectedFilter ? 'green' : 'gray'}
                     style={{cursor: 'pointer'}}
                 >
-                    {item.text}
+                    {item[locale].text}
                 </Badge>)
             }
             <Stack direction={'row'} flexWrap={'wrap'} gap={5}>
