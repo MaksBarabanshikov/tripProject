@@ -31,7 +31,7 @@ export const Login = () => {
         formState: {errors},
         trigger
     } = useForm({
-        mode: "onBlur",
+        mode: "all",
         resolver: yupResolver(schema)
     });
 
@@ -47,11 +47,11 @@ export const Login = () => {
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
             <MyInput
-                isError={!!errors.email}
+                isError={!!errors.username}
                 validate={register("username")}
                 isRequired
                 label={t('username')!}
-                error={errors?.email?.message}
+                error={errors?.username?.message}
             />
             <MyInput
                 isError={!!errors.password}

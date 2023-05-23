@@ -3,8 +3,6 @@ import './App.css'
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Pages} from "@/pages";
 import {Header} from "@/widgets/Header/header";
-import { useTranslation } from "react-i18next";
-import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 import MyLocalization from "@/feature/MyLocalization/ui/MyLocalization/MyLocalization";
 
 const queryClient = new QueryClient({
