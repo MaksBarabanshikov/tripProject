@@ -1,16 +1,29 @@
+import translate from "translate";
 import Tour from "../models/Tour.js";
 
+const fieldsToTranslate = {
+  name: '',
+  city: '',
+  address: '',
+  desc: '',
+}
+
 export const createTour = async (req, res, next) => {
+  const tourRu = req.body;
+
+  let tourWithTranslate = {};
+
+  for (const field in tourRu) {
+    if (tourRu.hasOwnProperty(field) && fieldsToTranslate.hasOwnProperty(field)) {
+      const translatedText = await translate(tourRu[field], { from: 'ru', to: 'en' });
+      tourWithTranslate[field] = {ru: tourRu[field], en: translatedText };
+    }
+  }
+
   const data = {
-    ...req.body,
-    time: new Date(req.body.time).toLocaleString('ru', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    }),
-    remainingPlaces: req.body.places
+    ...tourRu,
+    ...tourWithTranslate,
+    remainingPlaces: tourRu.places
   }
   const newTour = new Tour(data);
 

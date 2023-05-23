@@ -1,12 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import bodyParser from "body-parser"
+
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import toursRoute from "./routes/tours.js";
 import bookingsRoute from "./routes/bookings.js";
-import cookieParser from "cookie-parser";
-import cors from "cors";
 
 const app = express();
 dotenv.config();
@@ -40,6 +42,7 @@ const corsOptions = {
 //middlewares
 app.use(cors(corsOptions))
 app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/api/auth", authRoute);
