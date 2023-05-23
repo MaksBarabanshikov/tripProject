@@ -96,7 +96,15 @@ const FormAddTour = () => {
                     <MyErrorMessage title={handlingErrorMessage(error)}></MyErrorMessage>
                 </ScaleFade>
             }
-            <Button type={"submit"} colorScheme='facebook' isLoading={isLoading} disabled={isLoading} width={"full"}>Добавить</Button>
+            <Button
+                type={"submit"}
+                colorScheme='facebook'
+                isLoading={isLoading}
+                disabled={isLoading}
+                width={"full"}
+            >
+                Добавить
+            </Button>
         </form>
     );
 };

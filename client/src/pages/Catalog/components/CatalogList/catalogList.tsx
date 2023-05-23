@@ -23,7 +23,7 @@ export const CatalogList = () => {
     }
 
     return(
-        <Stack direction={'row'} flexWrap={'wrap'}>
+        <Stack direction={'row'} flexWrap={'wrap'} gap={5}>
             { tours.data.map((tour: any) => {
                 return <MyTourCard
                     key={tour._id}

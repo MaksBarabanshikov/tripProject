@@ -10,7 +10,7 @@ import {
     Menu,
     MenuButton, MenuItem, MenuList,
     Stack,
-    Text
+    Text, Tooltip
 } from "@chakra-ui/react";
 import styles from "./MyCard.module.css";
 import {ModalBooking} from "@/shared/ui/ModalBooking/ModalBooking";
@@ -103,7 +103,7 @@ export const MyTourCard: FC<PropsTour> = (
                 </Text>
             </CardBody>
             <CardFooter>
-                <Stack direction={'column'}>
+                <Stack style={{width: '100%'}} direction={'column'}>
                     {rate && <Heading as="h6" size="xs">Рейтинг: {rate}</Heading>}
                     <Text>
                         цена: {price + 'Р'}
@@ -152,9 +152,11 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
             <Text>
                 Количество людей: {booking.countPeople}
             </Text>
-            <Text>
-                Цена: {booking.price} Р
-            </Text>
+            <Tooltip label='Цена за 1 человека' fontSize='md'>
+                <Text>
+                    Цена:{booking.price} Р
+                </Text>
+            </Tooltip>
             <MyBadge status={booking.status}/>
             {pathname.includes('admin') &&
                 <Menu>

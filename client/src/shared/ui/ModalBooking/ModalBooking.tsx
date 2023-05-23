@@ -53,8 +53,8 @@ export const ModalBooking: FC<Props> = ({tour}) => {
 
     return (
         <>
-            <Stack justifyContent={'center'}>
-                <Button onClick={onOpen} disabled={!!tour.places}>Забронировать</Button>
+            <Stack style={{ width: '100%' }} justifyContent={'center'}>
+                <Button onClick={onOpen} width={"full"} disabled={!!tour.places}>Забронировать</Button>
             </Stack>
 
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -90,7 +90,7 @@ export const ModalBooking: FC<Props> = ({tour}) => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
                             <MyInput isRequired
                                      label={'Количество человек'}
                                      isError={!!errors.countPeople}
