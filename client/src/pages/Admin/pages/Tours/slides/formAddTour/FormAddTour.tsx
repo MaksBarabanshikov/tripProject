@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {object, string} from "yup";
 import {MyInput} from "@/shared/ui/MyInput";
 import {MySelect} from "@/shared/ui/MySelect";
@@ -9,27 +9,37 @@ import {useCreateTour} from "@/app/api/queries/admin/useCreateTour";
 import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";
 import {handlingErrorMessage} from "@/app/helpers";
 import {typesTours} from "@/app/constants";
-
-const schema = object({
-    name: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    type: string().required("Поле обязательно к заполнению"),
-    city: string().required("Поле обязательно к заполнению"),
-    address: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    desc: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    places: string().required("Поле обязательно к заполнению"),
-    price: string().required("Поле обязательно к заполнению"),
-    time: string().required("Поле обязательно к заполнению"),
-}).required();
-
+import {useTranslation} from "react-i18next";
+import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 const FormAddTour = () => {
-    const {isError, error, create, isLoading} = useCreateTour()
+    const {isError, error, create, isLoading} = useCreateTour();
+    const { locale } = useLocalization();
+
+    const { t} = useTranslation()
+
+    const schema = object({
+        name: string().required(t('errorRequired')!).min(5, t('errorMin5Symbol')!),
+        type: string().required(t('errorRequired')!),
+        city: string().required(t('errorRequired')!),
+        address: string().required(t('errorRequired')!).min(5, t('errorMin5Symbol')!),
+        desc: string().required(t('errorRequired')!).min(5, t('errorMin5Symbol')!),
+        places: string().required(t('errorRequired')!),
+        price: string().required(t('errorRequired')!),
+        time: string().required(t('errorRequired')!),
+    }).required();
+
+    useEffect(() => {
+        trigger();
+    }, [locale]);
+
 
     const {
         register,
         handleSubmit,
-        formState: {errors}
+        formState: {errors},
+        trigger
     } = useForm({
-        mode: "onBlur",
+        mode: "all",
         resolver: yupResolver(schema)
     });
 

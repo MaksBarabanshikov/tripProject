@@ -7,20 +7,21 @@ import {Button, ScaleFade} from "@chakra-ui/react";
 import {useLogin} from "@/app/api/queries/auth/useLogin";
 import {handlingErrorMessage} from "@/app/helpers";
 import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";
-
-const schema = object({
-    username: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    password: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-}).required();
+import {useTranslation} from "react-i18next";
 
 export const Login = () => {
-
+    const { t } = useTranslation()
     const {
         login,
         isLoading,
         error,
         isError
     } = useLogin();
+
+    const schema = object({
+        username: string().required(t('errorRequired')!).min(5, t('errorMin5Symbol')!),
+        password: string().required(t('errorRequired')!).min(5, t('errorMin5Symbol')!),
+    }).required();
 
     const {
         register,
@@ -41,7 +42,7 @@ export const Login = () => {
                 isError={!!errors.email}
                 validate={register("username")}
                 isRequired
-                label={'Имя пользователя'}
+                label={t('username')!}
                 error={errors?.email?.message}
             />
             <MyInput
@@ -49,7 +50,7 @@ export const Login = () => {
                 validate={register("password")}
                 isRequired
                 type="password"
-                label={'Пароль'}
+                label={t('password')!}
                 error={errors?.password?.message}
             />
             {
@@ -58,7 +59,7 @@ export const Login = () => {
                     <MyErrorMessage title={handlingErrorMessage(error)}></MyErrorMessage>
                 </ScaleFade>
             }
-            <Button type={"submit"} colorScheme='facebook' isLoading={isLoading} disabled={isLoading}>Войти</Button>
+            <Button type={"submit"} colorScheme='facebook' isLoading={isLoading} disabled={isLoading}>{t('signIn')}</Button>
         </form>
     )
 }

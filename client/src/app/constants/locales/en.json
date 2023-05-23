@@ -1,5 +1,15 @@
 {
   "welcome": "Добро пожаловать в наше приложение!",
+  "auth": "Authorization",
+  "register": "Registration",
+  "username": "Username",
+  "password": "Password",
+  "passwordConfirm": "Confirm password",
+  "email": "Email",
+  "country": "Country",
+  "phone": "Phone",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
   "tours": "Tours",
   "users": "Users",
   "bookings": "Bookings",
@@ -11,7 +21,16 @@
   "city": "City",
   "address": "Address",
   "description": "Description",
+  "rate": "Rate",
   "numberOfSeats": "Number of seats",
+  "placesLeft": "Places left",
   "price": "Price",
-  "time": "Time"
+  "time": "Time",
+  "toBook": "To Book",
+  "numberOfPersons": "Number Of Persons",
+  "listUsers": "List of users",
+  "errorRequired": "Field is required",
+  "errorMin5Symbol": "Minimum 5 characters",
+  "errorEmail": "Incorrect mail",
+  "errorConfirm": "Passwords must match"
 }

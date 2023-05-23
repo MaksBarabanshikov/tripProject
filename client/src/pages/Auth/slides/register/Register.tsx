@@ -7,21 +7,10 @@ import {useRegister} from "@/app/api/queries/auth/useRegister";
 import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";
 import {handlingErrorMessage} from "@/app/helpers";
 import {useLogin} from "@/app/api/queries/auth/useLogin";
-
-const schema = object({
-    username: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    password: string().required("Поле обязательно к заполнению").min(5, "Минимум 5 символов"),
-    email: string().required("Поле обязательно к заполнению").email("Некорректная почта"),
-    city: string().required("Поле обязательно к заполнению"),
-    country: string().required("Поле обязательно к заполнению"),
-    phone: string().required("Поле обязательно к заполнению"),
-    confirmPassword: string()
-        .required("Поле обязательно к заполнению")
-        .min(5, "Минимум 5 символов")
-        .oneOf([ref('password')], 'Пароли должны совпадать')
-}).required();
+import {useTranslation} from "react-i18next";
 
 export const Register = () => {
+    const {t} = useTranslation();
 
     const {
         isLoading,
@@ -37,6 +26,19 @@ export const Register = () => {
         isError: isErrorLogin,
         error: errorLogin
     } = useLogin()
+
+    const schema = object({
+        username: string().required(t("errorRequired")!).min(5, t("errorMin5Symbol")!),
+        password: string().required(t("errorRequired")!).min(5, t("errorMin5Symbol")!),
+        email: string().required(t("errorRequired")!).email(t("errorEmail")!),
+        city: string().required(t("errorRequired")!),
+        country: string().required(t("errorRequired")!),
+        phone: string().required(t("errorRequired")!),
+        confirmPassword: string()
+            .required(t("errorRequired")!)
+            .min(5, "Минимум 5 символов")
+            .oneOf([ref('password')], t("errorConfirm")!)
+    }).required();
 
     const {
         register,
@@ -58,35 +60,35 @@ export const Register = () => {
                 isError={!!errors.username}
                 validate={register("username")}
                 isRequired
-                label={'Имя пользователя'}
+                label={t('username')!}
                 error={errors?.username?.message}
             />
             <MyInput
                 isError={!!errors.email}
                 validate={register("email")}
                 isRequired
-                label={'Электронная почта'}
+                label={t('email')!}
                 error={errors?.email?.message}
             />
             <MyInput
                 isError={!!errors.country}
                 validate={register("country")}
                 isRequired
-                label={'Страна'}
+                label={t('country')!}
                 error={errors?.country?.message}
             />
             <MyInput
                 isError={!!errors.city}
                 validate={register("city")}
                 isRequired
-                label={'Город'}
+                label={t('city')!}
                 error={errors?.city?.message}
             />
             <MyInput
                 isError={!!errors.phone}
                 validate={register("phone")}
                 isRequired
-                label={'Телефон'}
+                label={t('phone')!}
                 error={errors?.phone?.message}
             />
             <MyInput
@@ -94,7 +96,7 @@ export const Register = () => {
                 validate={register("password")}
                 isRequired
                 type="password"
-                label={'Пароль'}
+                label={t('password')!}
                 error={errors?.password?.message}
             />
             <MyInput
@@ -102,7 +104,7 @@ export const Register = () => {
                 validate={register("confirmPassword")}
                 isRequired
                 type="password"
-                label={'Подтвердите пароль'}
+                label={t('passwordConfirm')!}
                 error={errors?.confirmPassword?.message}
             />
             {
@@ -117,7 +119,7 @@ export const Register = () => {
                 isLoading={isLoading || isLoadingLogin}
                 disabled={isLoading || isLoadingLogin}
             >
-                Войти
+                {t('signUp')}
             </Button>
         </form>
     )
