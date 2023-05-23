@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import {
     Button, Modal,
     ModalBody,
@@ -14,6 +14,7 @@ import {object, string} from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useTranslation} from "react-i18next";
+import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 
 export interface ITour {
     id?: string,
@@ -32,24 +33,28 @@ interface Props {
     tour: ITour;
 }
 
-const schema = object({
-    countPeople: string().required("Поле обязательно к заполнению")
-}).required();
 
 export const ModalBooking: FC<Props> = ({tour}) => {
     const {isOpen, onOpen, onClose}: any = useDisclosure()
     const {create} = useCreateBooking()
-
+    const {locale} = useLocalization()
     const { t } = useTranslation()
+    const schema = object({
+        countPeople: string().required(t('errorRequired')!)
+    }).required();
 
     const {
         register,
         handleSubmit,
-        formState: {errors}
+        formState: {errors},
+        trigger
     } = useForm({
-        mode: "onBlur",
+        mode: "all",
         resolver: yupResolver(schema)
     });
+    useEffect(() => {
+        trigger();
+    }, [locale]);
 
     const onSubmit = (data: any) => {
         create({tour: tour.id, price: data.countPeople * tour.price, ...data})
@@ -64,7 +69,7 @@ export const ModalBooking: FC<Props> = ({tour}) => {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>
                 <ModalContent>
-                    <ModalHeader>{ t('toBook') + tour.name}</ModalHeader>
+                    <ModalHeader>{ t('toBook') + ' ' + tour.name}</ModalHeader>
                     <ModalCloseButton/>
                     <ModalBody>
                         <Text>
@@ -93,7 +98,7 @@ export const ModalBooking: FC<Props> = ({tour}) => {
                     <ModalFooter>
                         <form style={{ width: '100%' }} onSubmit={handleSubmit(onSubmit)}>
                             <MyInput isRequired
-                                     label={'Количество человек'}
+                                     label={t('numberOfPersons')!}
                                      isError={!!errors.countPeople}
                                      validate={register("countPeople")}
                                      error={errors?.countPeople?.message}

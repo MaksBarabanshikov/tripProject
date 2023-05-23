@@ -66,7 +66,7 @@ const TourDetails = () => {
 
     return (
         <>
-            <Heading marginBottom={20}>Тур {tour.data.name[locale]}</Heading>
+            <Heading marginBottom={20}>{t('tour')!} {tour.data.name[locale]}</Heading>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <MyInput
                     isRequired
@@ -76,7 +76,7 @@ const TourDetails = () => {
                     error={errors?.name?.message}
                     value={tour.data.name[locale]}
                 />
-                <MySelect label={'Тип тура'} options={typesTours} validate={register("type")}
+                <MySelect label={t('typeTour')!} options={typesTours} validate={register("type")}
                           defaultValue={tour.data.type[locale]}/>
                 <MyInput
                     isRequired

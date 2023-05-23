@@ -8,6 +8,7 @@ import Tours from "@/pages/Admin/pages/Tours/Tours";
 import {MyLoader} from "@/shared/ui/MyLoader/MyLoader";
 import TourDetails from "@/pages/Admin/pages/TourDetails/TourDetails";
 import BookingsList from "@/pages/Admin/pages/Bookings/BookingsList";
+import {useTranslation} from "react-i18next";
 
 const Auth = React.lazy(() => import('./Auth/Auth'))
 const Admin = React.lazy(() => import('./Admin/Admin'))
@@ -16,7 +17,7 @@ const Profile = React.lazy(() => import('./Profile/Profile'))
 
 export const Pages = () => {
     const isAuth = useAuthStore( state => state.isAuth );
-
+    const {t} = useTranslation();
     return (
         <Routes>
             <Route path={'/'} element={<ProtectedRoute isAuth={!isAuth} redirectPath={'/catalog'} />}>
@@ -32,7 +33,7 @@ export const Pages = () => {
                         <Admin/>
                     </Suspense>
                 }>
-                    <Route index element={<Heading as="h1" size='xl'>Админ панель TRIP ADMIN</Heading>} />
+                    <Route index element={<Heading as="h1" size='xl'>{t('adminPanel')} TRIP ADMIN</Heading>} />
                     <Route path={'tours'} element={<Tours />} />
                     <Route path={'tours/:id'} element={<TourDetails/>}/>
                     <Route path={'users'} element={ <UsersList /> }/>
