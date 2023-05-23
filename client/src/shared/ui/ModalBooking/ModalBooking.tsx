@@ -23,7 +23,8 @@ export interface ITour {
     city: string,
     name: string,
     price: number,
-    time: string
+    time: string,
+    remainingPlaces: number
 }
 
 interface Props {
@@ -82,7 +83,7 @@ export const ModalBooking: FC<Props> = ({tour}) => {
                             Всего мест: {tour.places}
                         </Text>
                         <Text>
-                            Осталось мест: {tour.places - 1}
+                            Осталось мест: {tour.remainingPlaces}
                         </Text>
                         <Text>
                             Время : {tour.time}

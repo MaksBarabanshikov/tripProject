@@ -20,7 +20,13 @@ export const useLocalization = () => {
     }
 
     function normalizeDate(date: string) {
-        return new Date(date).toLocaleString(locale)
+        return new Date(date).toLocaleString(locale, {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+        })
     }
 
     return { handleChangeLocale, normalizeDate, locale }

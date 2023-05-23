@@ -118,7 +118,8 @@ export const MyTourCard: FC<PropsTour> = (
                             city,
                             name,
                             price,
-                            time
+                            time,
+                            remainingPlaces
                         }}
                         />
                     }
