@@ -1,3 +1,19 @@
 {
-  "welcome": "Welcome to our app!"
+  "welcome": "Добро пожаловать в наше приложение!",
+  "tours": "Туры",
+  "users": "Пользователи",
+  "bookings": "Бронирования",
+  "goToCatalog": "Перейти в каталог",
+  "addTour": "Добавить тур",
+  "listTour": "Список туров",
+  "nameTour": "Название тура",
+  "typeTour": "Тип тура",
+  "city": "Город",
+  "address": "Адрес",
+  "description": "Описание",
+  "numberOfSeats": "Количество мест",
+  "price": "Цена",
+  "time": "Время",
+  "errorRequired": "Field is required",
+  "errorMin5Symbol": "Minimum 5 characters"
 }

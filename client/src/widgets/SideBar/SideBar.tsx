@@ -3,27 +3,26 @@ import {FC} from "react";
 import {MyListItem} from "@/shared/ui/MyListItem";
 import {Button, Heading, Stack} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
-interface Props {
+export const SideBar: FC = () => {
+    const { t } = useTranslation()
 
-}
+    const items = [
+        {
+            title: t('tours'),
+            to: '/admin/tours',
+        },
+        {
+            title: t('users'),
+            to: '/admin/users',
+        },
+        {
+            title: t('bookings'),
+            to: '/admin/bookings'
+        }
+    ]
 
-const items = [
-    {
-        title: 'Туры',
-        to: '/admin/tours',
-    },
-    {
-        title: 'Пользователи',
-        to: '/admin/users',
-    },
-    {
-        title: 'Бронирования',
-        to: '/admin/bookings'
-    }
-]
-
-export const SideBar: FC<Props> = () => {
     return(
         <aside className={styles.sidebar}>
             <Link to={'/admin'}>
@@ -36,7 +35,7 @@ export const SideBar: FC<Props> = () => {
             </Stack>
             <Link to={'/catalog'}>
                 <Button marginTop={10}>
-                    Перейти в каталог
+                    { t('goToCatalog') }
                 </Button>
             </Link>
         </aside>

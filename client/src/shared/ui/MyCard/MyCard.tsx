@@ -6,7 +6,6 @@ import {
     CardFooter,
     CardHeader,
     Heading,
-    IconButton,
     Menu,
     MenuButton, MenuItem, MenuList,
     Stack,

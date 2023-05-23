@@ -13,5 +13,7 @@
   "description": "Описание",
   "numberOfSeats": "Количество мест",
   "price": "Цена",
-  "time": "Время"
+  "time": "Время",
+  "errorRequired": "Поле обязательно к заполнению",
+  "errorMin5Symbol": "Минимум 5 символов"
 }

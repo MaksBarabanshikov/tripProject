@@ -20,18 +20,11 @@ const queryClient = new QueryClient({
 })
 
 function App() {
-    const { t } = useTranslation()
-
-    const { locale, handleChangeLocale } = useLocalization()
-
   return (
     <QueryClientProvider client={queryClient}>
       <Header />
       <Pages/>
-      <h1 onClick={() => handleChangeLocale()}>{t('welcome')}</h1>
-      <h1 onClick={() => handleChangeLocale()}>{t('welcome')}</h1>
-      <h1>{ locale }</h1>
-        <MyLocalization/>
+      <MyLocalization/>
     </QueryClientProvider>
   )
 }
