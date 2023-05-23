@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {object, string} from "yup";
 import {MyInput} from "@/shared/ui/MyInput";
 import {MySelect} from "@/shared/ui/MySelect";
@@ -10,10 +10,8 @@ import {MyErrorMessage} from "@/shared/ui/MyErrorMessage/MyErrorMessage";
 import {handlingErrorMessage} from "@/app/helpers";
 import {typesTours} from "@/app/constants";
 import {useTranslation} from "react-i18next";
-import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 const FormAddTour = () => {
     const {isError, error, create, isLoading} = useCreateTour();
-    const { locale } = useLocalization();
 
     const { t} = useTranslation()
 
@@ -28,16 +26,10 @@ const FormAddTour = () => {
         time: string().required(t('errorRequired')!),
     }).required();
 
-    useEffect(() => {
-        trigger();
-    }, [locale]);
-
-
     const {
         register,
         handleSubmit,
         formState: {errors},
-        trigger
     } = useForm({
         mode: "all",
         resolver: yupResolver(schema)
