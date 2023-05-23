@@ -1,0 +1,17 @@
+.localization {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+}
+
+.localizationList {
+    display: flex;
+    justify-content: flex-end;
+    min-width: unset !important;
+    padding: unset !important;
+}
+
+.localizationItem {
+    width: 56px !important;
+    height: 40px;
+}

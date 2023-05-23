@@ -4,6 +4,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Pages} from "@/pages";
 import {AxiosResponse} from "axios";
 import {Header} from "@/widgets/Header/header";
+import MyLocalization from "@/shared/ui/MyLocalization/MyLocalization";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -18,12 +19,13 @@ const queryClient = new QueryClient({
 })
 
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Header />
-      <Pages/>
-    </QueryClientProvider>
-  )
+    return (
+        <QueryClientProvider client={queryClient}>
+            <Header/>
+            <Pages/>
+            <MyLocalization/>
+        </QueryClientProvider>
+    )
 }
 
 export default App
