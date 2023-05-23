@@ -96,7 +96,10 @@ export const ModalBooking: FC<Props> = ({tour}) => {
                                      label={'Количество человек'}
                                      isError={!!errors.countPeople}
                                      validate={register("countPeople")}
-                                     error={errors?.countPeople?.message}/>
+                                     error={errors?.countPeople?.message}
+                                     type={"number"}
+                                     max={Number(tour.remainingPlaces)}
+                            />
                             <Button variant='solid' type={"submit"}>Забронировать</Button>
                         </form>
                     </ModalFooter>

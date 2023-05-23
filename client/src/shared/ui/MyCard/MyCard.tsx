@@ -18,6 +18,7 @@ import MyBadge from "@/shared/ui/MyBadge/MyBage";
 import {useLocation} from "react-router-dom";
 import {statusesBookings} from "@/app/constants";
 import {usePutBooking} from "@/app/api/queries/booking/usePutBooking";
+import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 
 interface Props {
     name: string;
@@ -137,6 +138,7 @@ interface IBookingProps {
 export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
     const {put} = usePutBooking()
     const {pathname} = useLocation()
+    const {locale} = useLocalization()
 
     function onClick(data: any) {
         put(data)
@@ -172,7 +174,7 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
                                 return (
                                     <MenuItem key={item.value}
                                               onClick={() => onClick({...booking, status: item.value})}>
-                                        {item.text}
+                                        {item[locale].text}
                                     </MenuItem>
                                 )
                             }
