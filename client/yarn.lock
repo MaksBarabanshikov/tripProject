@@ -176,7 +176,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.19.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.7":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.6", "@babel/runtime@^7.20.7":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.5.tgz#8492dddda9644ae3bda3b45eabe87382caee7200"
   integrity sha512-8jI69toZqqcsnqGGqwGS4Qb1VwLOEp4hz+CXPywcvjs60u3B4Pom/U/7rm4W8tMOYEB+E9wgD0mW1l3r8qlI9Q==
@@ -2594,6 +2594,13 @@ hoist-non-react-statics@^3.3.1:
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   dependencies:
     react-is "^16.7.0"
+
+i18next@^22.5.0:
+  version "22.5.0"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.5.0.tgz#16d98eba7c748ab183a36505046b5b91f87e989b"
+  integrity sha512-sqWuJFj+wJAKQP2qBQ+b7STzxZNUmnSxrehBCCj9vDOW9RDYPfqCaK1Hbh2frNYQuPziz6O2CGoJPwtzY3vAYA==
+  dependencies:
+    "@babel/runtime" "^7.20.6"
 
 ignore@^5.2.0:
   version "5.2.4"
