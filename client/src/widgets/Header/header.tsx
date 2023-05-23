@@ -4,8 +4,10 @@ import {useUserStore} from "@/store/user";
 import {useAuthStore} from "@/store/auth";
 import {Link, Navigate, useLocation} from "react-router-dom";
 import {deleteCookie} from "@/app/helpers";
+import {useTranslation} from "react-i18next";
 
 export const Header = () => {
+    const {t} = useTranslation()
     const location = useLocation()
     const user = useUserStore(store => store.user);
     const setUser = useUserStore(store => store.setUser);
@@ -36,18 +38,18 @@ export const Header = () => {
                     { user?.isAdmin ?
                         <Link to={'/admin'}>
                             <Button marginLeft={2}>
-                                Админ панель
+                                {t('adminPanel')}
                             </Button>
                         </Link>
                         :
                         <Link to={'/profile'}>
                             <Button marginLeft={2}>
-                                Личный кабинет
+                                {t('myProfile')}
                             </Button>
                         </Link>
                     }
                     <Button marginLeft={2} onClick={() => handleLogout()}>
-                        Выйти
+                        {t('exit')}
                     </Button>
                 </div>
             </Stack>

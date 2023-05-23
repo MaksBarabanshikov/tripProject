@@ -18,6 +18,7 @@ import {useLocation} from "react-router-dom";
 import {statusesBookings} from "@/app/constants";
 import {usePutBooking} from "@/app/api/queries/booking/usePutBooking";
 import {useTranslation} from "react-i18next";
+import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
 
 interface Props {
     name: string;
@@ -123,7 +124,6 @@ export const MyTourCard: FC<PropsTour> = (
                             name,
                             price,
                             time,
-                            remainingPlaces
                         }}
                         />
                     }
@@ -139,6 +139,8 @@ interface IBookingProps {
 }
 
 export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
+    const {t} = useTranslation();
+    const { locale } = useLocalization()
     const {put} = usePutBooking()
     const {pathname} = useLocation()
 
@@ -149,17 +151,17 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
     return (
         <Card marginLeft={0} className={styles.MyCard} mb={mb}>
             <Text>
-                Тур: {booking?.tour?.name}
+                { t('tour') + ':' + booking?.tour?.name[locale]  }
             </Text>
             <Text>
-                Заказчик: {booking?.user?.username}
+                { t('customer') + ':' + booking?.user?.username  }
             </Text>
             <Text>
-                Количество людей: {booking.countPeople}
+                { t('numberOfPersons') + ':' + booking?.countPeople  }
             </Text>
-            <Tooltip label='Цена за 1 человека' fontSize='md'>
+            <Tooltip label={t('priceFor1Person')} fontSize='md'>
                 <Text>
-                    Цена:{booking.price} Р
+                    { t('price') + ':' + booking?.price + 'P'  }
                 </Text>
             </Tooltip>
             <MyBadge status={booking.status}/>
@@ -168,7 +170,7 @@ export const MyBookingCard: FC<IBookingProps> = ({booking, mb}) => {
                     <MenuButton
                         as={Button}
                     >
-                        Сменить статус
+                        { t('changeStatus') }
                     </MenuButton>
                     <MenuList>
                         {statusesBookings.map(item => {

@@ -51,50 +51,50 @@ const FormAddTour = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <MyInput
                 isRequired
-                label={'Название тура'}
+                label={t('nameTour')!}
                 isError={!!errors.name}
                 validate={register("name")}
                 error={errors?.name?.message}
             />
-            <MySelect label={'Тип тура'} options={typesTours} validate={register("type")}/>
+            <MySelect label={t('typeTour')!} options={typesTours} validate={register("type")}/>
             <MyInput
                 isRequired
-                label={'Город'}
+                label={t('city')!}
                 isError={!!errors.city}
                 validate={register("city")}
                 error={errors?.city?.message}
             />
             <MyInput
                 isRequired
-                label={'Адрес'}
+                label={t('address')!}
                 isError={!!errors.address}
                 validate={register("address")}
                 error={errors?.address?.message}
             />
             <MyInput
                 isRequired
-                label={'Описание'}
+                label={t('description')!}
                 isError={!!errors.desc}
                 validate={register("desc")}
                 error={errors?.desc?.message}
             />
             <MyInput
                 isRequired
-                label={'Количество мест'}
+                label={t('numberOfSeats')!}
                 isError={!!errors.places}
                 validate={register("places")}
                 error={errors?.places?.message}
             />
             <MyInput
                 isRequired
-                label={'Цена'}
+                label={t('price')!}
                 isError={!!errors.price}
                 validate={register("price")}
                 error={errors?.price?.message}
             />
             <MyInput
                 isRequired
-                label={'Время'}
+                label={t('time')!}
                 type={'datetime-local'}
                 isError={!!errors.time}
                 validate={register("time")}
@@ -113,7 +113,7 @@ const FormAddTour = () => {
                 disabled={isLoading}
                 width={"full"}
             >
-                Добавить
+                {t('add')}
             </Button>
         </form>
     );
