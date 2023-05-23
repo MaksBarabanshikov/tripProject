@@ -12,7 +12,7 @@ export const Header = () => {
     const isAuth = useAuthStore(store => store.isAuth);
     const setIsAuth = useAuthStore((state: any) => state.setIsAuth);
 
-    if (location.pathname.includes('admin')) return
+    if (location.pathname.includes('admin')) return <></>
 
 
     if (!isAuth) {
