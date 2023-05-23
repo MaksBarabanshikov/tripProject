@@ -5,6 +5,7 @@ import {Pages} from "@/pages";
 import {Header} from "@/widgets/Header/header";
 import { useTranslation } from "react-i18next";
 import {useLocalization} from "@/feature/MyLocalization/hooks/useLocalization";
+import MyLocalization from "@/feature/MyLocalization/ui/MyLocalization/MyLocalization";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -27,9 +28,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Header />
       <Pages/>
-      <h1 onClick={() => handleChangeLocale('ru')}>{t('welcome')}</h1>
-      <h1 onClick={() => handleChangeLocale('en')}>{t('welcome')}</h1>
+      <h1 onClick={() => handleChangeLocale()}>{t('welcome')}</h1>
+      <h1 onClick={() => handleChangeLocale()}>{t('welcome')}</h1>
       <h1>{ locale }</h1>
+        <MyLocalization/>
     </QueryClientProvider>
   )
 }

@@ -15,8 +15,8 @@ export const useLocalization = () => {
         },[locale])
 
 
-    function handleChangeLocale(lang: ILang) {
-        return setLocale(lang)
+    function handleChangeLocale() {
+        return setLocale(locale === 'ru' ? 'en' : 'ru' )
     }
 
     return { handleChangeLocale, locale }
