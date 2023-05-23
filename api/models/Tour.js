@@ -1,32 +1,57 @@
 import mongoose from "mongoose";
 const TourSchema = new mongoose.Schema({
   name: {
-    type: String,
-    required: true,
+    ru: {
+      type: String,
+      required: true
+    },
+    en: {
+      type: String,
+      required: true
+    }
   },
   type: {
     type: String,
     required: true,
   },
   city: {
-    type: String,
-    required: true,
+    ru: {
+      type: String,
+      required: true
+    },
+    en : {
+      type: String,
+      required: true
+    }
   },
   address: {
-    type: String,
-    required: true,
+    ru: {
+      type: String,
+      required: true
+    },
+    en : {
+      type: String,
+      required: true
+    }
   },
   photos: {
     type: [String],
   },
   desc: {
-    type: String,
-    required: true,
+    ru: {
+      type: String,
+      required: true
+    },
+    en : {
+      type: String,
+      required: true
+    }
   },
   rating: {
     type: Number,
     min: 0,
     max: 5,
+    default: 5
   },
   places: {
     type: Number,
