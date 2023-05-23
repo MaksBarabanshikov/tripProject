@@ -18,11 +18,11 @@ const ListTours = () => {
                 (<Link key={tour._id} to={`/admin/tours/${tour._id}`}>
                     <MyTourCard
                         price={tour.price}
-                        address={tour.address}
-                        city={tour.city}
+                        address={tour.address.en}
+                        city={tour.city.ru}
                         places={tour.places}
-                        name={tour.name}
-                        description={tour.desc}
+                        name={tour.name.en}
+                        description={tour.desc.ru}
                         rate={tour.rate}
                         time={tour.time}
                         remainingPlaces={tour.remainingPlaces}
