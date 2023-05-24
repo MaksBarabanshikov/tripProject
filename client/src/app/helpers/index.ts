@@ -1,11 +1,12 @@
 import {ILang} from "@/store/lang";
+import {useTranslation} from "react-i18next";
 
 export function handlingErrorMessage(error: any) {
+    const { t } = useTranslation()
     if (error?.response?.data?.message) {
-        console.log(error.response?.data?.message)
         return error?.response?.data?.message
     }
-    return "Неизвестная ошибка попробуйте обновить страницу";
+    return (t('errorUnknown'));
 }
 
 export function getCookie(name: string) {

@@ -26,9 +26,10 @@ interface Props {
     description?: string;
     rate?: number;
     mb?: string;
+    isAdmin?: boolean
 }
 
-export const MyCard: FC<Props> = ({name, description, rate}) => {
+export const MyCard: FC<Props> = ({name, description, rate, isAdmin= false}) => {
     const {t} = useTranslation();
     return (
         <Card marginLeft={0} className={styles.MyCard}>
@@ -41,10 +42,17 @@ export const MyCard: FC<Props> = ({name, description, rate}) => {
                         {description}
                     </Text>
                 }
+                {
+                    isAdmin &&
+                    <Heading marginTop={2} as={'h4'} size={'md'}>
+                        Admin
+                    </Heading>
+                }
             </CardBody>
-            <CardFooter>
-                {rate && <Heading as="h6" size="xs">{t('rate') + ':' + rate}</Heading>}
+            { rate && <CardFooter>
+                <Heading as="h6" size="xs">{t('rate') + ':' + rate}</Heading>
             </CardFooter>
+            }
         </Card>
     )
 }

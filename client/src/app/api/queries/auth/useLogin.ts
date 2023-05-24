@@ -5,8 +5,10 @@ import {useNavigate} from "react-router-dom";
 import {useAuthStore} from "@/store/auth";
 import {useToast} from "@chakra-ui/react";
 import {handlingErrorMessage} from "@/app/helpers";
+import {useTranslation} from "react-i18next";
 
 export const useLogin = () => {
+    const {t} = useTranslation();
     const navigate = useNavigate();
     const toast = useToast()
 
@@ -20,7 +22,7 @@ export const useLogin = () => {
             setUser(res.data)
             setIsAuth()
             toast({
-                title: 'Вы успешно вошли в систему',
+                title: t('successLogin'),
                 status: 'success',
                 duration: 9000,
                 isClosable: true,

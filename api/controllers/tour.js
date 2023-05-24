@@ -36,9 +36,26 @@ export const createTour = async (req, res, next) => {
 };
 export const updateTour = async (req, res, next) => {
   try {
+
+    const tourRu = req.body
+
+    let tourWithTranslate = {};
+
+    for (const field in tourRu) {
+      if (tourRu.hasOwnProperty(field) && fieldsToTranslate.hasOwnProperty(field)) {
+        const translatedText = await translate(tourRu[field], { from: 'ru', to: 'en' });
+        tourWithTranslate[field] = {ru: tourRu[field], en: translatedText };
+      }
+    }
+
+    const data = {
+      ...tourRu,
+      ...tourWithTranslate,
+    }
+
     const updatedTour = await Tour.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      { $set: data },
       { new: true }
     );
     res.status(200).json(updatedTour);

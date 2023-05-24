@@ -23,7 +23,7 @@ export const UsersList = () => {
             <Heading marginBottom={20}>{ t('listUsers') }</Heading>
             <Stack spacing={10} direction={'row'} alignContent={'center'} flexWrap='wrap' gap={10}>
                 { users &&
-                    users.data.map((user: any) => <MyCard key={user._id} name={user.username} description={user.email} />)
+                    users.data.map((user: any) => <MyCard key={user._id} name={user.username} description={user.email} isAdmin={user.isAdmin}/>)
                 }
             </Stack>
         </>

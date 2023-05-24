@@ -58,8 +58,9 @@ export const ModalBooking: FC<Props> = ({tour}) => {
         trigger();
     }, [locale]);
 
-    const onSubmit = (data: any) => {
-        create({tour: tour.id, price: data.countPeople * tour.price, ...data})
+    const onSubmit = async (data: any) => {
+        await create({tour: tour.id, price: data.countPeople * tour.price, ...data})
+        return onClose()
     }
 
     return (

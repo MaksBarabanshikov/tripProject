@@ -36,7 +36,7 @@ export const Register = () => {
         phone: string().required(t("errorRequired")!),
         confirmPassword: string()
             .required(t("errorRequired")!)
-            .min(5, "Минимум 5 символов")
+            .min(5, t("errorMin5Symbol")!)
             .oneOf([ref('password')], t("errorConfirm")!)
     }).required();
 
