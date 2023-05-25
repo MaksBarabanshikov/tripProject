@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    container_name: trip-service-client
+    command: npm run dev
+    restart: unless-stopped
+    volumes:
+      - ./client/src:/app/src
+    networks:
+      - trip-network
+
+  api:
+    container_name: trip-service-api
+    build: ./api
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - PORT=8800
+      - MONGO_URL=mongodb://api_db:27017/api
+      - AUTH_API_URL=http://auth:3001/api
+    depends_on:
+      - api_db
+    networks:
+      - trip-network
+
+  auth:
+    build: ./auth
+    container_name: trip-service-auth
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - PORT=3001
+      - MONGO_URL=mongodb://auth_db:27017/auth
+      - API_URL=http://api:8800/api
+    depends_on:
+      - auth_db
+    networks:
+      - trip-network
+
+  api_db:
+    container_name: trip-service-api-db
+    image: mongo:latest
+    volumes:
+      - mongodb_api:/data/db
+    networks:
+      - trip-network
+
+  auth_db:
+    image: mongo:latest
+    container_name: trip-service-auth-db
+    volumes:
+      - mongodb_auth:/data/db
+    networks:
+      - rtrip-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: trip-service-nginx
+    ports: ["80:80"]
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - client
+    networks:
+      - trip-network
+
+volumes:
+    mongodb_api:
+    mongodb_auth:
+
+networks:
+  trip-network:
+    driver: bridge
+
+
